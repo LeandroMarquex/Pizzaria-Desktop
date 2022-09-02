@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     
     
     // ALTERADO DA WEB 01/09/2022
+    // ALTERADO DA NETBEANS 01/09/2022
     
     
     public Principal() {
