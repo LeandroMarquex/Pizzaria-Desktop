@@ -16,6 +16,11 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    
+    
+    // ALTERADO DA WEB 01/09/2022
+    
+    
     public Principal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
