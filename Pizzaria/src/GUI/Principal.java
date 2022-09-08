@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import Utilitarios.FundoTela;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 /**
@@ -21,10 +23,14 @@ public class Principal extends javax.swing.JFrame {
     // ALTERADO DA WEB 01/09/2022
     // ALTERADO DA NETBEANS 01/09/2022
     
+    FundoTela tela;
     
     public Principal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLayout(new GridLayout());
+        tela = new FundoTela("imagens/pizza-fundo.jpg");
+        getContentPane().add(tela);
     }
 
     /**
