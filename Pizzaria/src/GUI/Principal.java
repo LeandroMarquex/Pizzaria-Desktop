@@ -24,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
     // ALTERADO DA NETBEANS 01/09/2022
     
     FundoTela tela;
+    ClienteTela clienteTela;
     
     public Principal() {
         initComponents();
@@ -44,10 +45,10 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        menuCliente = new javax.swing.JMenuItem();
+        menuFuncionacios = new javax.swing.JMenuItem();
+        menuCardapio = new javax.swing.JMenuItem();
+        menuEntregador = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -58,22 +59,27 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1.setText("CADASTRO");
 
-        jMenuItem1.setText("CLIENTES");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuCliente.setText("CLIENTES");
+        menuCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(menuCliente);
 
-        jMenuItem2.setText("FUNCIONÁRIOS");
-        jMenu1.add(jMenuItem2);
+        menuFuncionacios.setText("FUNCIONÁRIOS");
+        jMenu1.add(menuFuncionacios);
 
-        jMenuItem3.setText("CARDÁPIO");
-        jMenu1.add(jMenuItem3);
+        menuCardapio.setText("CARDÁPIO");
+        jMenu1.add(menuCardapio);
 
-        jMenuItem4.setText("ENTREGADOR");
-        jMenu1.add(jMenuItem4);
+        menuEntregador.setText("ENTREGADOR");
+        menuEntregador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEntregadorActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuEntregador);
 
         jMenuBar1.add(jMenu1);
 
@@ -101,23 +107,30 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGap(0, 579, Short.MAX_VALUE)
         );
 
-        pack();
+        setBounds(0, 0, 516, 639);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        clienteTela = new ClienteTela();
+        tela.add(clienteTela);
+        clienteTela.setVisible(true);
+    }//GEN-LAST:event_menuClienteActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void menuEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntregadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuEntregadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,10 +173,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem menuCardapio;
+    private javax.swing.JMenuItem menuCliente;
+    private javax.swing.JMenuItem menuEntregador;
+    private javax.swing.JMenuItem menuFuncionacios;
     // End of variables declaration//GEN-END:variables
 }
