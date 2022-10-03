@@ -5,10 +5,46 @@
  */
 package Controller;
 
+import Beans.ClienteBeans;
+import DAO.ClienteDAO;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Leandro Marques
  */
 public class ClienteController {
     
+    ClienteDAO clienteD;
+    
+    public ClienteController(){
+        clienteD = new ClienteDAO();
+        
+    }
+    
+    public boolean verificarDados(ClienteBeans cliente){
+        if(cliente.getNome().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Preencha o campo NOME ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                        return false;
+        }
+        if(cliente.getBairro().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Preencha o campo BAIRRO ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                        return false;
+        }
+        if(cliente.getRua().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Preencha o campo RUA ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                        return false;
+        }
+        if(cliente.getTelefone().equals("(  )      -    ")) {
+                        JOptionPane.showMessageDialog(null, "Preencha o campo TELEFONE ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                        return false;
+        }
+        clienteD.cadastrarCliente(cliente);
+         return true;
+    }
+    public String controleDeCodigo() {
+        return clienteD.proximoCliente();
+    }
+
 }

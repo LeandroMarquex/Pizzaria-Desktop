@@ -31,7 +31,8 @@ public class Conexao {
         try {
 
             Con = DriverManager.getConnection(URL, Usuario, Senha);
-            JOptionPane.showMessageDialog(null, "Conectado com Sucesso", "Conectado", 1);
+            Con.setAutoCommit(false);
+         //   JOptionPane.showMessageDialog(null, "Conectado com Sucesso", "Conectado", 1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Conectar com o Banco", "Erro", 0);
         }
