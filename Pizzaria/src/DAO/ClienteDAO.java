@@ -16,6 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -56,15 +58,33 @@ public class ClienteDAO {
             PreparedStatement ps = Conexao.getConnection().prepareStatement(SQLselection);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return (Integer.parseInt(rs.getString("cli_cod")) + 1)+ " ";
-            }else {
+                return (Integer.parseInt(rs.getString("cli_cod")) + 1) + " ";
+            } else {
                 return "1";
             }
-                
+
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao BUSCAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return "0";
+        }
+    }
+
+    public void buscarCliente(String pesquisa, DefaultTableModel modelo) {
+
+        try {
+            String SQLselection = "select * from clientes where cli_nome like '%" + pesquisa + "%'";
+            PreparedStatement ps = Conexao.getConnection().prepareStatement(SQLselection);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                modelo.addRow(new Object[] {rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao BUSCAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+
         }
     }
 

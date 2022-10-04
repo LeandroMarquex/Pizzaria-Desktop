@@ -5,7 +5,6 @@
  */
 package GUI;
 
-
 import Beans.ClienteBeans;
 import Controller.ClienteController;
 import DAO.ClienteDAO;
@@ -13,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -24,44 +24,43 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     /**
      * Creates new form ClienteTela
      */
-    
     MaskFormatter FormatoTel;
     SimpleDateFormat FormatoData;
     Date DataAtual;
     ClienteBeans ClienteB;
     ClienteController ClienteC;
-  //  ClienteDAO ClienteD;
-    
+    //  ClienteDAO ClienteD;
+    DefaultTableModel modelo;
+
     public ClienteTela() {
         initComponents();
-   //     txt_codigo.setEnabled(false);
+        //     txt_codigo.setEnabled(false);
         habilitarCampos(false);
-        
-        FormatoData = new SimpleDateFormat("dd/MM/yyyy");
-        DataAtual = new Date();
-        txt_data.setText(FormatoData.format(DataAtual));
-        
+
         ClienteB = new ClienteBeans();
         ClienteC = new ClienteController();
-        
+        modelo = (DefaultTableModel) tb_clientes.getModel();
+
     }
-    
-    final void habilitarCampos(boolean valor){
-     
+
+    final void habilitarCampos(boolean valor) {
+
         txt_bairro.setEnabled(valor);
         txt_rua.setEnabled(valor);
         txt_nome.setEnabled(valor);
         txt_telefone.setEnabled(valor);
         txt_data.setEnabled(valor);
-    }   
-     final void popularClienteBeans(){
-         ClienteB.setNome(txt_nome.getText());
-         ClienteB.setBairro(txt_bairro.getText());
-         ClienteB.setRua(txt_rua.getText());
-         ClienteB.setTelefone(txt_telefone.getText());
-         ClienteB.setDataCadastro(txt_data.getText());
-     }
-    
+    }
+
+    final void popularClienteBeans() {
+        ClienteB.setNome(txt_nome.getText());
+        ClienteB.setBairro(txt_bairro.getText());
+        ClienteB.setRua(txt_rua.getText());
+        ClienteB.setTelefone(txt_telefone.getText());
+        ClienteB.setDataCadastro(txt_data.getText());
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,15 +100,28 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("CADASTRO DE CLIENTES");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         txt_data.setEditable(false);
 
+        txt_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_buscarActionPerformed(evt);
+            }
+        });
+        txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_buscarKeyReleased(evt);
+            }
+        });
+
         tb_clientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "CÓDIGO", "NOME", "RUA", "BAIRRO", "TELEFONE"
@@ -264,18 +276,49 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
         // TODO add your handling code here:
+
+        FormatoData = new SimpleDateFormat("dd/MM/yyyy");
+        DataAtual = new Date();
+        txt_data.setText(FormatoData.format(DataAtual));
+
         habilitarCampos(true);
-       ClienteC.controleDeCodigo();
-       txt_codigo.setText(ClienteC.controleDeCodigo());
+        ClienteC.controleDeCodigo();
+        txt_codigo.setText(ClienteC.controleDeCodigo());
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
         // TODO add your handling code here:
         popularClienteBeans();
         ClienteC.verificarDados(ClienteB);
-        
-        
+        LimparCampos();
+
+
     }//GEN-LAST:event_btn_cadastrarActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formKeyReleased
+
+    private void txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_buscarActionPerformed
+
+    private void txt_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyReleased
+        // TODO add your handling code here:
+        modelo.setRowCount(0);
+        ClienteC.controlePesquisa(txt_buscar.getText(), modelo);
+    }//GEN-LAST:event_txt_buscarKeyReleased
+
+    final void LimparCampos() {
+        txt_codigo.setText("");
+        txt_nome.setText("");
+        txt_rua.setText("");
+        txt_bairro.setText("");
+        txt_telefone.setText("");
+        txt_data.setText("");
+
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
