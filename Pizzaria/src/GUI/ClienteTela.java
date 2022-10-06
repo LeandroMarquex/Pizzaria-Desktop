@@ -96,6 +96,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         txt_codigo = new javax.swing.JTextField();
         btn_novo = new javax.swing.JButton();
         btn_cadastrar = new javax.swing.JButton();
+        btn_cadastrar1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -136,6 +137,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
         tb_clientes.setToolTipText("");
+        tb_clientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_clientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tb_clientes);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -161,17 +167,27 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
         txt_codigo.setEditable(false);
 
-        btn_novo.setText("NOVO");
+        btn_novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilitarios/inserir.png"))); // NOI18N
+        btn_novo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_novo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_novoActionPerformed(evt);
             }
         });
 
-        btn_cadastrar.setText("CADASTRAR");
+        btn_cadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/salvar.png"))); // NOI18N
+        btn_cadastrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_cadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cadastrarActionPerformed(evt);
+            }
+        });
+
+        btn_cadastrar1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leandro Marques\\Documents\\NetBeansProjects\\Pizzaria\\imagens\\editar.png")); // NOI18N
+        btn_cadastrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cadastrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cadastrar1ActionPerformed(evt);
             }
         });
 
@@ -225,6 +241,8 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addComponent(btn_novo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_cadastrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_cadastrar1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -255,20 +273,23 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_novo)
-                    .addComponent(btn_cadastrar))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_novo)
+                            .addComponent(btn_cadastrar)))
+                    .addComponent(btn_cadastrar1))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -310,6 +331,23 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         ClienteC.controlePesquisa(txt_buscar.getText(), modelo);
     }//GEN-LAST:event_txt_buscarKeyReleased
 
+    private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
+
+        // TODO add your handling code here:
+        ClienteB = ClienteC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tb_clientes.getSelectedRow(), 0).toString()));
+        txt_codigo.setText(ClienteB.getCodigo() + "");
+        txt_nome.setText(ClienteB.getNome()+ "");
+        txt_rua.setText(ClienteB.getRua() + "");
+        txt_bairro.setText(ClienteB.getBairro() + "");
+        txt_telefone.setText(ClienteB.getTelefone() + "");
+        txt_data.setText(ClienteB.getDataCadastro()+ "");
+        
+    }//GEN-LAST:event_tb_clientesMouseClicked
+
+    private void btn_cadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_cadastrar1ActionPerformed
+
     final void LimparCampos() {
         txt_codigo.setText("");
         txt_nome.setText("");
@@ -323,6 +361,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cadastrar;
+    private javax.swing.JButton btn_cadastrar1;
     private javax.swing.JButton btn_novo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

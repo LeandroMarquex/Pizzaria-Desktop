@@ -24,8 +24,12 @@ import javax.swing.tree.DefaultTreeModel;
  * @author Leandro Marques
  */
 public class ClienteDAO {
+    
+    // ClienteBeans clientes;
 
     public ClienteDAO() {
+        
+    //    clientes = new ClienteBeans();
 
     }
 
@@ -87,5 +91,30 @@ public class ClienteDAO {
 
         }
     }
+    public ClienteBeans preencherCampos(int codigo){
+        
+        ClienteBeans clientes = new ClienteBeans();
+        
+        try {
+            String SQLselection = "select * from clientes where cli_cod = ?";
+            PreparedStatement ps = Conexao.getConnection().prepareStatement(SQLselection);
+            ps.setInt(1, codigo);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                clientes.setCodigo(rs.getInt("cli_cod"));
+                clientes.setNome(rs.getString("cli_nome"));
+                clientes.setRua(rs.getString("cli_rua"));
+                clientes.setBairro(rs.getString("cli_bairro"));
+                clientes.setTelefone(rs.getString("cli_telefone"));
+                clientes.setDataCadastro(Corretores.ConverterParaJava(rs.getString("cli_data_cad")));
+                
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao BUSCAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+
+        }
+        return clientes;
+    }
 }
