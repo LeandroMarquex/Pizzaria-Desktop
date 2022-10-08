@@ -53,6 +53,27 @@ public class ClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao CADASTRAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
         }
     }
+     public void editarCliente(ClienteBeans cliente) {
+
+        String SQLInsertion = "update clientes set cli_nome = ?, cli_rua = ?, cli_bairro = ?, cli_telefone = ? where cli_cod = ?";
+        try {
+            PreparedStatement pst = Conexao.getConnection().prepareStatement(SQLInsertion);
+            pst.setString(1, cliente.getNome());
+            pst.setString(2, cliente.getRua());
+            pst.setString(3, cliente.getBairro());
+            pst.setString(4, cliente.getTelefone());
+        //    pst.setString(5, Corretores.ConverterParaSQL(cliente.getDataCadastro()));
+             pst.setInt(5, cliente.getCodigo());
+
+            pst.execute();
+            Conexao.getConnection().commit();
+            JOptionPane.showMessageDialog(null, "Registro EDITADO com Sucesso", "EDITADO", 1, new ImageIcon("Imagens/ok.png"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao EDITAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+        }
+    }
 
     public String proximoCliente() {
 

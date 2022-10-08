@@ -7,6 +7,7 @@ package GUI;
 
 import Utilitarios.FundoTela;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -18,20 +19,30 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    
-    
     // ALTERADO DA WEB 01/09/2022
     // ALTERADO DA NETBEANS 01/09/2022
-    
     FundoTela tela;
     ClienteTela clienteTela;
-    
+
     public Principal() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new GridLayout());
         tela = new FundoTela("imagens/pizza-fundo.jpg");
         getContentPane().add(tela);
+
+        menuCliente.setIcon(new ImageIcon("Imagens/ico_clientes.png"));
+        menuFuncionarios.setIcon(new ImageIcon("Imagens/ico_func.png"));
+        menuCardapio.setIcon(new ImageIcon("Imagens/ico_cardapio.png"));
+        menuEntregador.setIcon(new ImageIcon("Imagens/ico_boy.png"));
+        menuCadastro.setIcon(new ImageIcon("Imagens/inserir-32.png"));
+        menuCaixa.setIcon(new ImageIcon("Imagens/ico_caixa.png"));
+        menuRelatorio.setIcon(new ImageIcon("Imagens//ico_rel.png"));
+        menuSair.setIcon(new ImageIcon("Imagens/ico_sair.png"));
+
+        ImageIcon icone = new ImageIcon("Imagens/ico_cardapio.png");
+        setIconImage(icone.getImage());
+
     }
 
     /**
@@ -44,20 +55,20 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuCadastro = new javax.swing.JMenu();
         menuCliente = new javax.swing.JMenuItem();
-        menuFuncionacios = new javax.swing.JMenuItem();
+        menuFuncionarios = new javax.swing.JMenuItem();
         menuCardapio = new javax.swing.JMenuItem();
         menuEntregador = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        menuCaixa = new javax.swing.JMenu();
+        menuPedido = new javax.swing.JMenuItem();
+        menuRelatorio = new javax.swing.JMenu();
+        menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PIZZARIA MARQUES");
 
-        jMenu1.setText("CADASTRO");
+        menuCadastro.setText("CADASTRO");
 
         menuCliente.setText("CLIENTES");
         menuCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -65,13 +76,13 @@ public class Principal extends javax.swing.JFrame {
                 menuClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(menuCliente);
+        menuCadastro.add(menuCliente);
 
-        menuFuncionacios.setText("FUNCIONÁRIOS");
-        jMenu1.add(menuFuncionacios);
+        menuFuncionarios.setText("FUNCIONÁRIOS");
+        menuCadastro.add(menuFuncionarios);
 
         menuCardapio.setText("CARDÁPIO");
-        jMenu1.add(menuCardapio);
+        menuCadastro.add(menuCardapio);
 
         menuEntregador.setText("ENTREGADOR");
         menuEntregador.addActionListener(new java.awt.event.ActionListener() {
@@ -79,27 +90,27 @@ public class Principal extends javax.swing.JFrame {
                 menuEntregadorActionPerformed(evt);
             }
         });
-        jMenu1.add(menuEntregador);
+        menuCadastro.add(menuEntregador);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuCadastro);
 
-        jMenu2.setText("CAIXA");
+        menuCaixa.setText("CAIXA");
 
-        jMenuItem5.setText("PEDIDO");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuPedido.setText("PEDIDO");
+        menuPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuPedidoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
+        menuCaixa.add(menuPedido);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuCaixa);
 
-        jMenu4.setText("RELATÓRIO");
-        jMenuBar1.add(jMenu4);
+        menuRelatorio.setText("RELATÓRIO");
+        jMenuBar1.add(menuRelatorio);
 
-        jMenu3.setText("SAIR");
-        jMenuBar1.add(jMenu3);
+        menuSair.setText("SAIR");
+        jMenuBar1.add(menuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -124,9 +135,9 @@ public class Principal extends javax.swing.JFrame {
         clienteTela.setVisible(true);
     }//GEN-LAST:event_menuClienteActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void menuPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_menuPedidoActionPerformed
 
     private void menuEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntregadorActionPerformed
         // TODO add your handling code here:
@@ -168,15 +179,15 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenu menuCadastro;
+    private javax.swing.JMenu menuCaixa;
     private javax.swing.JMenuItem menuCardapio;
     private javax.swing.JMenuItem menuCliente;
     private javax.swing.JMenuItem menuEntregador;
-    private javax.swing.JMenuItem menuFuncionacios;
+    private javax.swing.JMenuItem menuFuncionarios;
+    private javax.swing.JMenuItem menuPedido;
+    private javax.swing.JMenu menuRelatorio;
+    private javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables
 }

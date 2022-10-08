@@ -96,7 +96,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         txt_codigo = new javax.swing.JTextField();
         btn_novo = new javax.swing.JButton();
         btn_cadastrar = new javax.swing.JButton();
-        btn_cadastrar1 = new javax.swing.JButton();
+        btn_editar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -183,11 +183,11 @@ public class ClienteTela extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_cadastrar1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leandro Marques\\Documents\\NetBeansProjects\\Pizzaria\\imagens\\editar.png")); // NOI18N
-        btn_cadastrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btn_cadastrar1.addActionListener(new java.awt.event.ActionListener() {
+        btn_editar.setIcon(new javax.swing.ImageIcon("C:\\Users\\Leandro Marques\\Documents\\NetBeansProjects\\Pizzaria\\imagens\\editar.png")); // NOI18N
+        btn_editar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cadastrar1ActionPerformed(evt);
+                btn_editarActionPerformed(evt);
             }
         });
 
@@ -242,7 +242,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_cadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_cadastrar1)
+                .addComponent(btn_editar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -288,7 +288,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_novo)
                             .addComponent(btn_cadastrar)))
-                    .addComponent(btn_cadastrar1))
+                    .addComponent(btn_editar))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
@@ -334,6 +334,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
     private void tb_clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_clientesMouseClicked
 
         // TODO add your handling code here:
+        habilitarCampos(true);
         ClienteB = ClienteC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tb_clientes.getSelectedRow(), 0).toString()));
         txt_codigo.setText(ClienteB.getCodigo() + "");
         txt_nome.setText(ClienteB.getNome()+ "");
@@ -344,9 +345,16 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_tb_clientesMouseClicked
 
-    private void btn_cadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrar1ActionPerformed
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_cadastrar1ActionPerformed
+        popularClienteBeans();
+        ClienteC.verificarDadosEditar(ClienteB);
+        LimparCampos();
+        txt_buscar.setText("");
+        habilitarCampos(false);
+        
+
+    }//GEN-LAST:event_btn_editarActionPerformed
 
     final void LimparCampos() {
         txt_codigo.setText("");
@@ -361,7 +369,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cadastrar;
-    private javax.swing.JButton btn_cadastrar1;
+    private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_novo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
