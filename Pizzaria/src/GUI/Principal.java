@@ -23,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
     // ALTERADO DA NETBEANS 01/09/2022
     FundoTela tela;
     ClienteTela clienteTela;
+    FuncionarioTela funcionarioTela;
 
     public Principal() {
         initComponents();
@@ -79,6 +80,11 @@ public class Principal extends javax.swing.JFrame {
         menuCadastro.add(menuCliente);
 
         menuFuncionarios.setText("FUNCIONÁRIOS");
+        menuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFuncionariosActionPerformed(evt);
+            }
+        });
         menuCadastro.add(menuFuncionarios);
 
         menuCardapio.setText("CARDÁPIO");
@@ -142,6 +148,15 @@ public class Principal extends javax.swing.JFrame {
     private void menuEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntregadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuEntregadorActionPerformed
+
+    private void menuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionariosActionPerformed
+        // TODO add your handling code here:
+        funcionarioTela = new FuncionarioTela();
+        tela.add(funcionarioTela);
+        funcionarioTela.setVisible(true);
+        
+        
+    }//GEN-LAST:event_menuFuncionariosActionPerformed
 
     /**
      * @param args the command line arguments
