@@ -21,7 +21,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author Leandro Marques
  */
-public class FuncionarioTela extends javax.swing.JInternalFrame {
+public class EntregadorTela extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ClienteTela
@@ -34,7 +34,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
     //  ClienteDAO ClienteD;
     DefaultTableModel modelo;
 
-    public FuncionarioTela() {
+    public EntregadorTela() {
         initComponents();
         //     txt_codigo.setEnabled(false);
         habilitarCampos(false);
@@ -48,7 +48,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
     final void habilitarCampos(boolean valor) {
 
         txt_nome.setEnabled(valor);
-        cb_cargo.setEnabled(valor);
+        
         txt_nome.setEnabled(valor);
         
         txt_data.setEnabled(valor);
@@ -56,7 +56,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
 
     final void popularFuncionarioBeans() {
         FuncionarioB.setNome(txt_nome.getText());
-        FuncionarioB.setCargo(cb_cargo.getSelectedItem().toString());
+        
         FuncionarioB.setDataCad(txt_data.getText());
 
     }
@@ -87,7 +87,6 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
         btn_novo = new javax.swing.JButton();
         btn_cadastrar = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
-        cb_cargo = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -142,7 +141,6 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
         jLabel2.setText("NOME");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("CARGO");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("DATA");
@@ -181,8 +179,6 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
             }
         });
 
-        cb_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um CARGO...", "ATENDENTE", "CAIXA", "GERENTE ", "ADMINISTRADOR" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,10 +205,12 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(13, 13, 13)))
+                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,11 +219,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,13 +231,11 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cb_cargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -265,7 +257,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
                                 .addComponent(btn_novo)
                                 .addComponent(btn_cadastrar))
                             .addComponent(btn_editar))))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         setBounds(200, 50, 614, 584);
@@ -314,7 +306,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
         FuncionarioB = FuncionarioC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tb_funcionarios.getSelectedRow(), 0).toString()));
         txt_codigo.setText(FuncionarioB.getCodigo() + "");
         txt_nome.setText(FuncionarioB.getNome()+ "");
-        cb_cargo.setSelectedItem(FuncionarioB.getCargo()+ "");
+        
      //   txt_bairro.setText(ClienteB.getBairro() + "");
       //  txt_telefone.setText(ClienteB.getTelefone() + "");
         txt_data.setText(FuncionarioB.getDataCad()+ "");
@@ -339,7 +331,7 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
     final void LimparCampos() {
         txt_codigo.setText("");
         txt_nome.setText("");
-        cb_cargo.setSelectedIndex(0);
+        
         txt_data.setText("");
 
     }
@@ -349,7 +341,6 @@ public class FuncionarioTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_cadastrar;
     private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_novo;
-    private javax.swing.JComboBox<String> cb_cargo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
