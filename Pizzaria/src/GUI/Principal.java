@@ -24,6 +24,8 @@ public class Principal extends javax.swing.JFrame {
     FundoTela tela;
     ClienteTela clienteTela;
     FuncionarioTela funcionarioTela;
+    EntregadorTela entregadorTela;
+    CardapioTela cardapioTela;
 
     public Principal() {
         initComponents();
@@ -88,6 +90,11 @@ public class Principal extends javax.swing.JFrame {
         menuCadastro.add(menuFuncionarios);
 
         menuCardapio.setText("CARDÁPIO");
+        menuCardapio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCardapioActionPerformed(evt);
+            }
+        });
         menuCadastro.add(menuCardapio);
 
         menuEntregador.setText("ENTREGADOR");
@@ -147,6 +154,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntregadorActionPerformed
         // TODO add your handling code here:
+        entregadorTela = new EntregadorTela();
+        tela.add(entregadorTela);
+        entregadorTela.setVisible(true);
     }//GEN-LAST:event_menuEntregadorActionPerformed
 
     private void menuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionariosActionPerformed
@@ -154,9 +164,16 @@ public class Principal extends javax.swing.JFrame {
         funcionarioTela = new FuncionarioTela();
         tela.add(funcionarioTela);
         funcionarioTela.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_menuFuncionariosActionPerformed
+
+    private void menuCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCardapioActionPerformed
+        // TODO add your handling code here:
+        cardapioTela = new CardapioTela();
+        tela.add(cardapioTela);
+        cardapioTela.setVisible(true);
+    }//GEN-LAST:event_menuCardapioActionPerformed
 
     /**
      * @param args the command line arguments

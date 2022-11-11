@@ -5,11 +5,11 @@
  */
 package GUI;
 
-
-import Beans.EntregadoresBeans;
-import Controller.EntregadorController;
-
-import DAO.EntregadorDAO;
+import Beans.ClienteBeans;
+import Beans.FuncionarioBeans;
+import Controller.ClienteController;
+import Controller.FuncionarioController;
+import DAO.ClienteDAO;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
@@ -21,7 +21,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author Leandro Marques
  */
-public class EntregadorTela extends javax.swing.JInternalFrame {
+public class CardapioTela extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ClienteTela
@@ -29,35 +29,35 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTel;
     SimpleDateFormat FormatoData;
     Date DataAtual;
-    EntregadoresBeans EntregadorB;
-    EntregadorController EntregadorC;
-    //  EntregadorDAO ClienteD;
+    FuncionarioBeans FuncionarioB;
+    FuncionarioController FuncionarioC;
+    //  ClienteDAO ClienteD;
     DefaultTableModel modelo;
 
-    public EntregadorTela() {
+    public CardapioTela() {
         initComponents();
         //     txt_codigo.setEnabled(false);
         habilitarCampos(false);
 
-        EntregadorB = new EntregadoresBeans();
-        EntregadorC = new EntregadorController();
-        modelo = (DefaultTableModel) tb_entregador.getModel();
+        FuncionarioB = new FuncionarioBeans();
+        FuncionarioC = new FuncionarioController();
+        modelo = (DefaultTableModel) tabela.getModel();
 
     }
 
     final void habilitarCampos(boolean valor) {
 
-        txt_nome.setEnabled(valor);
+        txt_descricao.setEnabled(valor);
+        cb_tipo.setEnabled(valor);
+        txt_descricao.setEnabled(valor);
         
-        txt_nome.setEnabled(valor);
-        
-        txt_data.setEnabled(valor);
+        txt_valor.setEnabled(valor);
     }
 
-    final void popularEntrgadorBeans() {
-        EntregadorB.setNome(txt_nome.getText());
-        
-        EntregadorB.setDataCadastro(txt_data.getText());
+    final void popularFuncionarioBeans() {
+        FuncionarioB.setNome(txt_descricao.getText());
+        FuncionarioB.setCargo(cb_tipo.getSelectedItem().toString());
+        FuncionarioB.setDataCad(txt_valor.getText());
 
     }
 
@@ -70,12 +70,12 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt_nome = new javax.swing.JTextField();
-        txt_data = new javax.swing.JTextField();
+        txt_descricao = new javax.swing.JTextField();
+        txt_valor = new javax.swing.JTextField();
         txt_buscar = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tb_entregador = new javax.swing.JTable();
+        tabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -87,17 +87,18 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
         btn_novo = new javax.swing.JButton();
         btn_cadastrar = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
+        cb_tipo = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("CADASTRO DE ENTREGADOR");
+        setTitle("CADASTRO DE CARDAPIO");
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
             }
         });
 
-        txt_data.setEditable(false);
+        txt_valor.setEditable(false);
 
         txt_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +111,7 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
             }
         });
 
-        tb_entregador.setModel(new javax.swing.table.DefaultTableModel(
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -126,24 +127,25 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        tb_entregador.setToolTipText("");
-        tb_entregador.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabela.setToolTipText("");
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tb_entregadorMouseClicked(evt);
+                tabelaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tb_entregador);
+        jScrollPane1.setViewportView(tabela);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("CÓDIGO");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("NOME");
+        jLabel2.setText("DESCRICAO");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("TIPO");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("DATA");
+        jLabel6.setText("VALOR");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("BUSCAR");
@@ -179,6 +181,8 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
             }
         });
 
+        cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um TIPO...", "PIZZA", "SUCO ", "REFRI", " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,12 +209,10 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +221,11 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,11 +237,13 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -257,7 +265,7 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
                                 .addComponent(btn_novo)
                                 .addComponent(btn_cadastrar))
                             .addComponent(btn_editar))))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
 
         setBounds(200, 50, 614, 584);
@@ -268,17 +276,17 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
 
         FormatoData = new SimpleDateFormat("dd/MM/yyyy");
         DataAtual = new Date();
-        txt_data.setText(FormatoData.format(DataAtual));
+        txt_valor.setText(FormatoData.format(DataAtual));
 
         habilitarCampos(true);
-        EntregadorC.controleDeCodigo();
-        txt_codigo.setText(EntregadorC.controleDeCodigo());
+        FuncionarioC.controleDeCodigo();
+        txt_codigo.setText(FuncionarioC.controleDeCodigo());
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
         // TODO add your handling code here:
-        popularEntrgadorBeans();
-       EntregadorC.verificarDados(EntregadorB);
+        popularFuncionarioBeans();
+       FuncionarioC.verificarDados(FuncionarioB);
         LimparCampos();
 
 
@@ -296,27 +304,27 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
     private void txt_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyReleased
         // TODO add your handling code here:
         modelo.setRowCount(0);
-       EntregadorC.controlePesquisa(txt_buscar.getText(), modelo);
+       FuncionarioC.controlePesquisa(txt_buscar.getText(), modelo);
     }//GEN-LAST:event_txt_buscarKeyReleased
 
-    private void tb_entregadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_entregadorMouseClicked
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
 
         // TODO add your handling code here:
         habilitarCampos(true);
-        EntregadorB = EntregadorC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tb_entregador.getSelectedRow(), 0).toString()));
-        txt_codigo.setText(EntregadorB.getCodigo() + "");
-        txt_nome.setText(EntregadorB.getNome()+ "");
-        
+        FuncionarioB = FuncionarioC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tabela.getSelectedRow(), 0).toString()));
+        txt_codigo.setText(FuncionarioB.getCodigo() + "");
+        txt_descricao.setText(FuncionarioB.getNome()+ "");
+        cb_tipo.setSelectedItem(FuncionarioB.getCargo()+ "");
      //   txt_bairro.setText(ClienteB.getBairro() + "");
       //  txt_telefone.setText(ClienteB.getTelefone() + "");
-        txt_data.setText(EntregadorB.getDataCadastro()+ "");
+        txt_valor.setText(FuncionarioB.getDataCad()+ "");
         
-    }//GEN-LAST:event_tb_entregadorMouseClicked
+    }//GEN-LAST:event_tabelaMouseClicked
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         // TODO add your handling code here:
-        popularEntrgadorBeans();
-        EntregadorC.verificarDadosEditar(EntregadorB);
+        popularFuncionarioBeans();
+        FuncionarioC.verificarDadosEditar(FuncionarioB);
         LimparCampos();
         txt_buscar.setText("");
         habilitarCampos(false);
@@ -330,9 +338,9 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
 
     final void LimparCampos() {
         txt_codigo.setText("");
-        txt_nome.setText("");
-        
-        txt_data.setText("");
+        txt_descricao.setText("");
+        cb_tipo.setSelectedIndex(0);
+        txt_valor.setText("");
 
     }
 
@@ -341,6 +349,7 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_cadastrar;
     private javax.swing.JButton btn_editar;
     private javax.swing.JButton btn_novo;
+    private javax.swing.JComboBox<String> cb_tipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -350,10 +359,10 @@ public class EntregadorTela extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTable tb_entregador;
+    private javax.swing.JTable tabela;
     private javax.swing.JTextField txt_buscar;
     private javax.swing.JTextField txt_codigo;
-    private javax.swing.JTextField txt_data;
-    private javax.swing.JTextField txt_nome;
+    private javax.swing.JTextField txt_descricao;
+    private javax.swing.JTextField txt_valor;
     // End of variables declaration//GEN-END:variables
 }

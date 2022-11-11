@@ -29,10 +29,6 @@ public class EntregadorController {
                         JOptionPane.showMessageDialog(null, "Preencha o campo NOME ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
                         return false;
         }
-        if(entregador.getStatus().equals("")) {
-                        JOptionPane.showMessageDialog(null, "Preencha o campo STATUS ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
-                        return false;
-        }
         
         entregadorD.cadastrarEntregador(entregador);
          return true;

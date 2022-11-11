@@ -29,6 +29,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="CARD&#xc1;PIO"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuCardapioActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuEntregador">
               <Properties>

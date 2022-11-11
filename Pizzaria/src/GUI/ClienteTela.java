@@ -45,9 +45,10 @@ public class ClienteTela extends javax.swing.JInternalFrame {
 
     final void habilitarCampos(boolean valor) {
 
-        txt_bairro.setEnabled(valor);
-        txt_rua.setEnabled(valor);
+        //   txt_codigo.setText("");
         txt_nome.setEnabled(valor);
+        txt_rua.setEnabled(valor);
+        txt_bairro.setEnabled(valor);
         txt_telefone.setEnabled(valor);
         txt_data.setEnabled(valor);
     }
@@ -289,7 +290,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
                             .addComponent(btn_novo)
                             .addComponent(btn_cadastrar)))
                     .addComponent(btn_editar))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
@@ -337,12 +338,12 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         habilitarCampos(true);
         ClienteB = ClienteC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tb_clientes.getSelectedRow(), 0).toString()));
         txt_codigo.setText(ClienteB.getCodigo() + "");
-        txt_nome.setText(ClienteB.getNome()+ "");
+        txt_nome.setText(ClienteB.getNome() + "");
         txt_rua.setText(ClienteB.getRua() + "");
         txt_bairro.setText(ClienteB.getBairro() + "");
         txt_telefone.setText(ClienteB.getTelefone() + "");
-        txt_data.setText(ClienteB.getDataCadastro()+ "");
-        
+        txt_data.setText(ClienteB.getDataCadastro() + "");
+
     }//GEN-LAST:event_tb_clientesMouseClicked
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
@@ -352,7 +353,7 @@ public class ClienteTela extends javax.swing.JInternalFrame {
         LimparCampos();
         txt_buscar.setText("");
         habilitarCampos(false);
-        
+
 
     }//GEN-LAST:event_btn_editarActionPerformed
 
