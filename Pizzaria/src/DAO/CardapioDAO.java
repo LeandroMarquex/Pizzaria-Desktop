@@ -53,12 +53,13 @@ public class CardapioDAO {
 
     public void editarCardapio(CardapioBeans cardapio) {
 
-        String SQLInsertion = "update cardapio set car_descrecap = ?, car_tipo = ?, car_valor = ? where car_cod = ?";
+        String SQLInsertion = "update cardapio set car_descricao = ?, car_tipo = ?, car_valor = ? where car_cod = ?";
         try {
             PreparedStatement pst = Conexao.getConnection().prepareStatement(SQLInsertion);
             pst.setString(1, cardapio.getDescricao());
             pst.setString(2, cardapio.getTipo());
-            pst.setInt(3, cardapio.getCodigo());
+            pst.setDouble(3, cardapio.getValor());
+            pst.setInt(4, cardapio.getCodigo());
 
             pst.execute();
             Conexao.getConnection().commit();
@@ -93,11 +94,11 @@ public class CardapioDAO {
     public void buscarCardapio(String pesquisa, DefaultTableModel modelo) {
 
         try {
-            String SQLselection = "select * from cardapio where fun_nome like '%" + pesquisa + "%'";
+            String SQLselection = "select * from cardapio where car_descricao like '%" + pesquisa + "%'";
             PreparedStatement ps = Conexao.getConnection().prepareStatement(SQLselection);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                modelo.addRow(new Object[]{rs.getString("fun_cod"), rs.getString("fun_nome"), rs.getString("fun_cargo"), Corretores.ConverterParaJava(rs.getString("fun_data_cad"))});
+                modelo.addRow(new Object[]{rs.getString("car_cod"), rs.getString("car_descricao"), rs.getString("car_tipo"), rs.getString("car_valor")});
 
             }
 

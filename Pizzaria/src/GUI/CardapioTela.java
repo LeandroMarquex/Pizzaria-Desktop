@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,15 +6,10 @@
  */
 package GUI;
 
-import Beans.ClienteBeans;
-import Beans.FuncionarioBeans;
-import Controller.ClienteController;
-import Controller.FuncionarioController;
-import DAO.ClienteDAO;
+import Beans.CardapioBeans;
+import Controller.CardapioController;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -29,8 +25,8 @@ public class CardapioTela extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTel;
     SimpleDateFormat FormatoData;
     Date DataAtual;
-    FuncionarioBeans FuncionarioB;
-    FuncionarioController FuncionarioC;
+    CardapioBeans cardapioB;
+    CardapioController cardapioC;
     //  ClienteDAO ClienteD;
     DefaultTableModel modelo;
 
@@ -39,8 +35,8 @@ public class CardapioTela extends javax.swing.JInternalFrame {
         //     txt_codigo.setEnabled(false);
         habilitarCampos(false);
 
-        FuncionarioB = new FuncionarioBeans();
-        FuncionarioC = new FuncionarioController();
+        cardapioB = new CardapioBeans();
+        cardapioC = new CardapioController();
         modelo = (DefaultTableModel) tabela.getModel();
 
     }
@@ -49,15 +45,15 @@ public class CardapioTela extends javax.swing.JInternalFrame {
 
         txt_descricao.setEnabled(valor);
         cb_tipo.setEnabled(valor);
-        txt_descricao.setEnabled(valor);
-        
+        //      txt_descricao.setEnabled(valor);
+
         txt_valor.setEnabled(valor);
     }
 
-    final void popularFuncionarioBeans() {
-        FuncionarioB.setNome(txt_descricao.getText());
-        FuncionarioB.setCargo(cb_tipo.getSelectedItem().toString());
-        FuncionarioB.setDataCad(txt_valor.getText());
+    final void popularCardapioBeans() {
+        cardapioB.setDescricao(txt_descricao.getText());
+        cardapioB.setTipo(cb_tipo.getSelectedItem().toString());
+       cardapioB.setValor(Double.parseDouble(txt_valor.getText()));
 
     }
 
@@ -71,7 +67,6 @@ public class CardapioTela extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         txt_descricao = new javax.swing.JTextField();
-        txt_valor = new javax.swing.JTextField();
         txt_buscar = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -88,6 +83,7 @@ public class CardapioTela extends javax.swing.JInternalFrame {
         btn_cadastrar = new javax.swing.JButton();
         btn_editar = new javax.swing.JButton();
         cb_tipo = new javax.swing.JComboBox<>();
+        txt_valor = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -97,8 +93,6 @@ public class CardapioTela extends javax.swing.JInternalFrame {
                 formKeyReleased(evt);
             }
         });
-
-        txt_valor.setEditable(false);
 
         txt_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +177,12 @@ public class CardapioTela extends javax.swing.JInternalFrame {
 
         cb_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione um TIPO...", "PIZZA", "SUCO ", "REFRI", " " }));
 
+        txt_valor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_valorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,7 +210,10 @@ public class CardapioTela extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cb_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(144, 144, 144)
+                                .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txt_descricao, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(13, 13, 13)))
                 .addContainerGap())
@@ -223,9 +226,7 @@ public class CardapioTela extends javax.swing.JInternalFrame {
                         .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +266,7 @@ public class CardapioTela extends javax.swing.JInternalFrame {
                                 .addComponent(btn_novo)
                                 .addComponent(btn_cadastrar))
                             .addComponent(btn_editar))))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         setBounds(200, 50, 614, 584);
@@ -274,20 +275,25 @@ public class CardapioTela extends javax.swing.JInternalFrame {
     private void btn_novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_novoActionPerformed
         // TODO add your handling code here:
 
-        FormatoData = new SimpleDateFormat("dd/MM/yyyy");
-        DataAtual = new Date();
-        txt_valor.setText(FormatoData.format(DataAtual));
+   //     FormatoData = new SimpleDateFormat("dd/MM/yyyy");
+   //     DataAtual = new Date();
+    //    txt_valor.setText(FormatoData.format(DataAtual));
 
         habilitarCampos(true);
-        FuncionarioC.controleDeCodigo();
-        txt_codigo.setText(FuncionarioC.controleDeCodigo());
+        cardapioC.controleDeCodigo();
+        txt_codigo.setText(cardapioC.controleDeCodigo());
+        txt_valor.setText("0");
+        txt_descricao.setText("");
+        cb_tipo.setSelectedIndex(0);
+        
     }//GEN-LAST:event_btn_novoActionPerformed
 
     private void btn_cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cadastrarActionPerformed
         // TODO add your handling code here:
-        popularFuncionarioBeans();
-       FuncionarioC.verificarDados(FuncionarioB);
-        LimparCampos();
+        popularCardapioBeans();
+        cardapioC.verificarDados(cardapioB);
+    //    LimparCampos();
+        
 
 
     }//GEN-LAST:event_btn_cadastrarActionPerformed
@@ -304,37 +310,41 @@ public class CardapioTela extends javax.swing.JInternalFrame {
     private void txt_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyReleased
         // TODO add your handling code here:
         modelo.setRowCount(0);
-       FuncionarioC.controlePesquisa(txt_buscar.getText(), modelo);
+        cardapioC.controlePesquisa(txt_buscar.getText(), modelo);
     }//GEN-LAST:event_txt_buscarKeyReleased
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
 
         // TODO add your handling code here:
         habilitarCampos(true);
-        FuncionarioB = FuncionarioC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tabela.getSelectedRow(), 0).toString()));
-        txt_codigo.setText(FuncionarioB.getCodigo() + "");
-        txt_descricao.setText(FuncionarioB.getNome()+ "");
-        cb_tipo.setSelectedItem(FuncionarioB.getCargo()+ "");
-     //   txt_bairro.setText(ClienteB.getBairro() + "");
-      //  txt_telefone.setText(ClienteB.getTelefone() + "");
-        txt_valor.setText(FuncionarioB.getDataCad()+ "");
-        
+        cardapioB = cardapioC.controlePreencherCampos(Integer.parseInt(modelo.getValueAt(tabela.getSelectedRow(), 0).toString()));
+        txt_codigo.setText(cardapioB.getCodigo() + "");
+        txt_descricao.setText(cardapioB.getDescricao() + "");
+        cb_tipo.setSelectedItem(cardapioB.getTipo() + "");
+        //   txt_bairro.setText(ClienteB.getBairro() + "");
+        //  txt_telefone.setText(ClienteB.getTelefone() + "");
+        txt_valor.setText(cardapioB.getValor() + "");
+
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
         // TODO add your handling code here:
-        popularFuncionarioBeans();
-        FuncionarioC.verificarDadosEditar(FuncionarioB);
-        LimparCampos();
+        popularCardapioBeans();
+        cardapioC.verificarDadosEditar(cardapioB);
+   //     LimparCampos();
         txt_buscar.setText("");
         habilitarCampos(false);
-        
+
 
     }//GEN-LAST:event_btn_editarActionPerformed
 
     private void txt_codigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_codigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_codigoActionPerformed
+
+    private void txt_valorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_valorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_valorActionPerformed
 
     final void LimparCampos() {
         txt_codigo.setText("");
