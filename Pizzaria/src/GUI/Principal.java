@@ -26,6 +26,7 @@ public class Principal extends javax.swing.JFrame {
     FuncionarioTela funcionarioTela;
     EntregadorTela entregadorTela;
     CardapioTela cardapioTela;
+    PedidoTela pedidoTela;
 
     public Principal() {
         initComponents();
@@ -42,6 +43,7 @@ public class Principal extends javax.swing.JFrame {
         menuCaixa.setIcon(new ImageIcon("Imagens/ico_caixa.png"));
         menuRelatorio.setIcon(new ImageIcon("Imagens//ico_rel.png"));
         menuSair.setIcon(new ImageIcon("Imagens/ico_sair.png"));
+        menuPedido.setIcon(new ImageIcon("Imagens/ico_pedidos.png"));
 
         ImageIcon icone = new ImageIcon("Imagens/ico_cardapio.png");
         setIconImage(icone.getImage());
@@ -150,6 +152,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoActionPerformed
         // TODO add your handling code here:
+        pedidoTela = new PedidoTela();
+        tela.add(pedidoTela);
+        pedidoTela.setVisible(true);
     }//GEN-LAST:event_menuPedidoActionPerformed
 
     private void menuEntregadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEntregadorActionPerformed

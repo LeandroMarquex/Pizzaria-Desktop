@@ -8,6 +8,7 @@ package DAO;
 import Beans.ClienteBeans;
 import Utilitarios.Conexao;
 import Utilitarios.Corretores;
+import java.util.List;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,6 +104,23 @@ public class ClienteDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 modelo.addRow(new Object[] {rs.getString("cli_cod"), rs.getString("cli_nome"), rs.getString("cli_rua"), rs.getString("cli_bairro"), rs.getString("cli_telefone")});
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao BUSCAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+
+        }
+    }
+     public void buscarCliente(String pesquisa, List<String> lista) {
+
+        try {
+            String SQLselection = "select * from clientes where cli_nome like '%" + pesquisa + "%'";
+            PreparedStatement ps = Conexao.getConnection().prepareStatement(SQLselection);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                lista.add(rs.getString("cli_cod") + " - " + rs.getString("cli_nome"));
                 
             }
 

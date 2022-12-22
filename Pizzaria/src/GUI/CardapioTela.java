@@ -110,7 +110,7 @@ public class CardapioTela extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "NOME", "CARGO", "TELEFONE"
+                "CÓDIGO", "DESCRIÇÃO", "TIPO", "DATA"
             }
         ) {
             boolean[] canEdit = new boolean [] {
