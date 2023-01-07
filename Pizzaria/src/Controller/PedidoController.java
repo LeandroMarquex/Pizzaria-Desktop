@@ -23,5 +23,11 @@ public class PedidoController {
     public void controleDeItens(String pesquisa, List<String>ListaDeItens) {
         pedidoD.pesquisaDeItens(pesquisa, ListaDeItens);
     }
+    public double controleDeValor(String pesquisa) {
+        return pedidoD.valorDoItem(pesquisa);
+    }
+     public int controleDeCodigo(String pesquisa) {
+        return pedidoD.valorDoCodigo(pesquisa);
+    }
     
 }

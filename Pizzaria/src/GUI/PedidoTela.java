@@ -31,6 +31,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     PedidoBeans pedidoB;
     PedidoController pedidoC;
     List<String> lista;
+    List<String> listaDeItens;
 
     MaskFormatter FormatoTel;
     SimpleDateFormat FormatoData;
@@ -40,12 +41,13 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         initComponents();
         habilitarCampos(false);
         lista = new ArrayList<>();
+        listaDeItens = new ArrayList<>();
 
         clienteB = new ClienteBeans();
         clienteC = new ClienteController();
         pedidoB = new PedidoBeans();
         pedidoC = new PedidoController();
-        PainelPai.setEnabledAt(0, false);
+        PainePedido.setEnabledAt(0, false);
     }
 
     /**
@@ -57,14 +59,30 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PainelPai = new javax.swing.JTabbedPane();
+        PainePedido = new javax.swing.JTabbedPane();
+        painelCliente = new javax.swing.JPanel();
+        btn_pesquisar = new javax.swing.JButton();
+        cb_pesquisa_cliente = new javax.swing.JComboBox<>();
+        txt_codigo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txt_nome = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txt_rua = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txt_bairro = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txt_data = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        txt_telefone = new javax.swing.JTextField();
         PainelPedido = new javax.swing.JPanel();
         txt_nome_cliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txt_item = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        cb_selecionar = new javax.swing.JComboBox<>();
-        btn_valor = new javax.swing.JButton();
+        cb_selecionar_item = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txt_valor = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -81,179 +99,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         tabela_pedido = new javax.swing.JTable();
         btn_finalizar = new javax.swing.JButton();
         btn_fechar = new javax.swing.JButton();
-        painelCliente = new javax.swing.JPanel();
-        btn_pesquisar = new javax.swing.JButton();
-        cb_pesquisa_cliente = new javax.swing.JComboBox<>();
-        txt_codigo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txt_nome = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txt_rua = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txt_bairro = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        try {
-            FormatoTel = new MaskFormatter("(##) #####-####");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao INSERIR campo personalizado", "Erro", 0);
-        }
-        txt_telefone = new JFormattedTextField(FormatoTel);
-        jLabel6 = new javax.swing.JLabel();
-        txt_data = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_valor_item = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
         setTitle("PEDIDO");
-
-        txt_nome_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        jLabel7.setText("Item");
-
-        txt_item.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_itemActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Selecionar");
-
-        cb_selecionar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btn_valor.setText("Valor");
-
-        jLabel9.setText("Valor");
-
-        jLabel10.setText("Quantidade");
-
-        jLabel11.setText("Código");
-
-        btn_adicionar.setText("+");
-
-        btn_remover.setText("-");
-
-        btn_calcular.setText("Calcular");
-
-        jLabel12.setText("Total");
-
-        tabela_pedido.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null}
-            },
-            new String [] {
-                "Código Item", "Descrição", "Valor Unitário", "Total"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tabela_pedido);
-
-        btn_finalizar.setText("Finalizar");
-
-        btn_fechar.setText("Fechar");
-
-        javax.swing.GroupLayout PainelPedidoLayout = new javax.swing.GroupLayout(PainelPedido);
-        PainelPedido.setLayout(PainelPedidoLayout);
-        PainelPedidoLayout.setHorizontalGroup(
-            PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelPedidoLayout.createSequentialGroup()
-                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(PainelPedidoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_nome_cliente)
-                            .addGroup(PainelPedidoLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_item, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cb_selecionar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(PainelPedidoLayout.createSequentialGroup()
-                                .addComponent(btn_valor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(61, 61, 61)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_codigo_pedido))
-                            .addGroup(PainelPedidoLayout.createSequentialGroup()
-                                .addComponent(btn_adicionar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_remover)
-                                .addGap(125, 125, 125)
-                                .addComponent(btn_calcular)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-            .addGroup(PainelPedidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelPedidoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_finalizar)
-                .addGap(85, 85, 85)
-                .addComponent(btn_fechar)
-                .addGap(28, 28, 28))
-        );
-        PainelPedidoLayout.setVerticalGroup(
-            PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PainelPedidoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txt_nome_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(cb_selecionar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_valor)
-                    .addComponent(jLabel9)
-                    .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10)
-                    .addComponent(txt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(txt_codigo_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_adicionar)
-                    .addComponent(btn_remover)
-                    .addComponent(btn_calcular)
-                    .addComponent(jLabel12)
-                    .addComponent(txt_valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_finalizar)
-                    .addComponent(btn_fechar))
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
-
-        PainelPai.addTab("Pedido", PainelPedido);
 
         btn_pesquisar.setText("Pesquisar");
         btn_pesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -312,58 +162,71 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         painelCliente.setLayout(painelClienteLayout);
         painelClienteLayout.setHorizontalGroup(
             painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelClienteLayout.createSequentialGroup()
-                .addComponent(btn_pesquisar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cb_pesquisa_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClienteLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2)
                 .addGap(35, 35, 35))
+            .addGroup(painelClienteLayout.createSequentialGroup()
+                .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelClienteLayout.createSequentialGroup()
+                        .addComponent(btn_pesquisar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cb_pesquisa_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelClienteLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(txt_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelClienteLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(painelClienteLayout.createSequentialGroup()
                     .addGap(38, 38, 38)
                     .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelClienteLayout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(painelClienteLayout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addGap(32, 32, 32)
-                            .addComponent(txt_nome))
-                        .addGroup(painelClienteLayout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(41, 41, 41)
-                            .addComponent(txt_rua))
-                        .addGroup(painelClienteLayout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6)
+                            .addComponent(jLabel1)
                             .addGap(18, 18, 18)
-                            .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 236, Short.MAX_VALUE))
                         .addGroup(painelClienteLayout.createSequentialGroup()
-                            .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelClienteLayout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(painelClienteLayout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txt_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGap(39, 39, 39)))
+                                    .addComponent(jLabel2)
+                                    .addGap(32, 32, 32)
+                                    .addComponent(txt_nome))
+                                .addGroup(painelClienteLayout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(41, 41, 41)
+                                    .addComponent(txt_rua)))
+                            .addGap(39, 39, 39)))))
         );
         painelClienteLayout.setVerticalGroup(
             painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelClienteLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cb_pesquisa_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_pesquisar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 350, Short.MAX_VALUE)
+                .addGap(100, 100, 100)
+                .addComponent(txt_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                 .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -383,31 +246,201 @@ public class PedidoTela extends javax.swing.JInternalFrame {
                         .addComponent(txt_rua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txt_bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(painelClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(txt_telefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(257, Short.MAX_VALUE)))
+                    .addComponent(jLabel4)
+                    .addContainerGap(271, Short.MAX_VALUE)))
         );
 
-        PainelPai.addTab("Clientes", painelCliente);
+        PainePedido.addTab("Clientes", painelCliente);
+
+        txt_nome_cliente.setEditable(false);
+        txt_nome_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel7.setText("Item");
+
+        txt_item.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txt_itemMouseReleased(evt);
+            }
+        });
+        txt_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_itemActionPerformed(evt);
+            }
+        });
+        txt_item.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_itemKeyReleased(evt);
+            }
+        });
+
+        jLabel8.setText("Selecionar");
+
+        cb_selecionar_item.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Busque um item ao lado" }));
+        cb_selecionar_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_selecionar_itemActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Valor");
+
+        txt_valor.setEditable(false);
+
+        jLabel10.setText("Quantidade");
+
+        jLabel11.setText("Código");
+
+        txt_codigo_pedido.setEditable(false);
+
+        btn_adicionar.setText("+");
+
+        btn_remover.setText("-");
+
+        btn_calcular.setText("Calcular");
+
+        jLabel12.setText("Total");
+
+        tabela_pedido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código Item", "Descrição", "Valor Unitário", "Total"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabela_pedido);
+
+        btn_finalizar.setText("Finalizar");
+
+        btn_fechar.setText("Fechar");
+
+        btn_valor_item.setText("Valor");
+        btn_valor_item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_valor_itemActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PainelPedidoLayout = new javax.swing.GroupLayout(PainelPedido);
+        PainelPedido.setLayout(PainelPedidoLayout);
+        PainelPedidoLayout.setHorizontalGroup(
+            PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelPedidoLayout.createSequentialGroup()
+                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addGroup(PainelPedidoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_nome_cliente)
+                            .addGroup(PainelPedidoLayout.createSequentialGroup()
+                                .addComponent(btn_adicionar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_remover)
+                                .addGap(125, 125, 125)
+                                .addComponent(btn_calcular)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PainelPedidoLayout.createSequentialGroup()
+                                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_valor_item, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PainelPedidoLayout.createSequentialGroup()
+                                        .addComponent(txt_item, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cb_selecionar_item, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(PainelPedidoLayout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(61, 61, 61)
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_codigo_pedido)))))))
+                .addContainerGap())
+            .addGroup(PainelPedidoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelPedidoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_finalizar)
+                .addGap(85, 85, 85)
+                .addComponent(btn_fechar)
+                .addGap(28, 28, 28))
+        );
+        PainelPedidoLayout.setVerticalGroup(
+            PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelPedidoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txt_nome_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txt_item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(cb_selecionar_item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txt_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(txt_quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(txt_codigo_pedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_valor_item))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_adicionar)
+                    .addComponent(btn_remover)
+                    .addComponent(btn_calcular)
+                    .addComponent(jLabel12)
+                    .addComponent(txt_valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(PainelPedidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_finalizar)
+                    .addComponent(btn_fechar))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        PainePedido.addTab("Pedido", PainelPedido);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(PainelPai)
-                .addGap(116, 116, 116))
+                .addGap(22, 22, 22)
+                .addComponent(PainePedido)
+                .addGap(94, 94, 94))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PainelPai)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PainePedido)
+                .addContainerGap())
         );
 
         setBounds(200, 100, 616, 500);
@@ -436,7 +469,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
             String cod = cb_pesquisa_cliente.getSelectedItem().toString();
             cod = cod.substring(0, cod.indexOf(" "));
             clienteB = clienteC.controlePreencherCampos(Integer.parseInt(cod));
-           
+
             txt_codigo.setText(clienteB.getCodigo() + "");
             txt_nome.setText(clienteB.getNome() + "");
             txt_rua.setText(clienteB.getRua() + "");
@@ -448,19 +481,51 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        PainelPai.setEnabledAt(1, false);
-        PainelPai.setEnabledAt(0, true);
-        PainelPai.setSelectedIndex(1);
+        PainePedido.setEnabledAt(1, false);
+        PainePedido.setEnabledAt(0, true);
+        PainePedido.setSelectedIndex(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_itemActionPerformed
-        // TODO add your handling code here:
-        pedidoC.controleDeItens(title, lista);
+        // TODO add your handling code here
+        //  txt_valor.setText("");
+        cb_selecionar_item.removeAllItems();
+        listaDeItens.clear();
+        pedidoC.controleDeItens(txt_item.getText(), listaDeItens);
+        for (String i : listaDeItens) {
+            cb_selecionar_item.addItem(i);
+        }
     }//GEN-LAST:event_txt_itemActionPerformed
+
+    private void txt_itemMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_itemMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_itemMouseReleased
+
+    private void txt_itemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_itemKeyReleased
+        // TODO add your handling code here:
+        txt_valor.setText(title);
+        cb_selecionar_item.removeAllItems();
+        listaDeItens.clear();
+        pedidoC.controleDeItens(txt_item.getText(), listaDeItens);
+        for (String i : listaDeItens) {
+            cb_selecionar_item.addItem(i);
+    }//GEN-LAST:event_txt_itemKeyReleased
+
+    private void btn_valor_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_valor_itemActionPerformed
+        // TODO add your handling code here:
+       txt_valor.setText(pedidoC.controleDeValor(cb_selecionar_item.getSelectedItem().toString()) + "");
+       txt_codigo_pedido.setText(pedidoC.controleDeCodigo(cb_selecionar_item.getSelectedItem().toString()) + "");
+    }//GEN-LAST:event_btn_valor_itemActionPerformed
+
+    private void cb_selecionar_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_selecionar_itemActionPerformed
+        // TODO add your handling code here:
+        txt_valor.setText("");
+        txt_quantidade.setText("");
+    }//GEN-LAST:event_cb_selecionar_itemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane PainelPai;
+    private javax.swing.JTabbedPane PainePedido;
     private javax.swing.JPanel PainelPedido;
     private javax.swing.JButton btn_adicionar;
     private javax.swing.JButton btn_calcular;
@@ -468,9 +533,9 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_finalizar;
     private javax.swing.JButton btn_pesquisar;
     private javax.swing.JButton btn_remover;
-    private javax.swing.JButton btn_valor;
+    private javax.swing.JButton btn_valor_item;
     private javax.swing.JComboBox<String> cb_pesquisa_cliente;
-    private javax.swing.JComboBox<String> cb_selecionar;
+    private javax.swing.JComboBox<String> cb_selecionar_item;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

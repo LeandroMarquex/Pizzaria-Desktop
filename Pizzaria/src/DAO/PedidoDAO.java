@@ -21,13 +21,13 @@ import javax.swing.JOptionPane;
  */
 public class PedidoDAO {
 
-    public void pesquisaDeItens(String pesquisa, List<String> ListaDeItens) {
+    public void pesquisaDeItens(String pesquisa, List<String> listaDeItens) {
         try {
             String SQLPesquisa = "select * from cardapio where car_descricao like '%" + pesquisa + "%'";
-            PreparedStatement st = Conexao.getConnection().prepareStatement(pesquisa);
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLPesquisa);
             ResultSet rs = st.executeQuery();
-            while (rs.next()) {                
-                ListaDeItens.add(rs.getString("car_descricao"));
+            while (rs.next()) {
+                listaDeItens.add(rs.getString("car_descricao"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,5 +37,39 @@ public class PedidoDAO {
 
     }
 
-}
+    public double valorDoItem(String pesquisa) {
+        try {
+            String SQLPesquisa = "select * from cardapio where car_descricao = ? ";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLPesquisa);
+            st.setString(1, pesquisa);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble("car_valor");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao PESQUISAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
 
+        }
+        return  0;
+        
+    }
+     public int valorDoCodigo(String pesquisa) {
+        try {
+            String SQLPesquisa = "select * from cardapio where car_descricao = ? ";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLPesquisa);
+            st.setString(1, pesquisa);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("car_cod");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao PESQUISAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+
+        }
+        return  0;
+        
+    }
+
+}
