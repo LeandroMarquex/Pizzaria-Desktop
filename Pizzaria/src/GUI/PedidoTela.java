@@ -13,8 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -32,6 +34,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     PedidoController pedidoC;
     List<String> lista;
     List<String> listaDeItens;
+    DefaultTableModel modelo;
 
     MaskFormatter FormatoTel;
     SimpleDateFormat FormatoData;
@@ -48,6 +51,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         pedidoB = new PedidoBeans();
         pedidoC = new PedidoController();
         PainePedido.setEnabledAt(0, false);
+        modelo = (DefaultTableModel)tabela_pedido.getModel();
     }
 
     /**
@@ -288,11 +292,28 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Quantidade");
 
+        txt_quantidade.setText("1");
+        txt_quantidade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_quantidadeFocusLost(evt);
+            }
+        });
+        txt_quantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_quantidadeActionPerformed(evt);
+            }
+        });
+
         jLabel11.setText("Código");
 
         txt_codigo_pedido.setEditable(false);
 
         btn_adicionar.setText("+");
+        btn_adicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_adicionarActionPerformed(evt);
+            }
+        });
 
         btn_remover.setText("-");
 
@@ -302,14 +323,14 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
         tabela_pedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+                {null, null, null, null, null}
             },
             new String [] {
-                "Código Item", "Descrição", "Valor Unitário", "Total"
+                "Código Item", "Descrição", "Valor Unitário", "", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -520,8 +541,32 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     private void cb_selecionar_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_selecionar_itemActionPerformed
         // TODO add your handling code here:
         txt_valor.setText("");
-        txt_quantidade.setText("");
+        txt_quantidade.setText("1");
     }//GEN-LAST:event_cb_selecionar_itemActionPerformed
+
+    private void txt_quantidadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_quantidadeFocusLost
+        // TODO add your handling code here:
+        try {
+            int x = Integer.parseInt(txt_quantidade.getText());
+            if (x==0) {
+               JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0 ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));  
+               txt_quantidade.setText("1");
+               txt_quantidade.requestFocus();
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Insira um  número inteiro ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+        }
+        
+    }//GEN-LAST:event_txt_quantidadeFocusLost
+
+    private void txt_quantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_quantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_quantidadeActionPerformed
+
+    private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
+        // TODO add your handling code here:
+        if(pedidoC.verificarItens(txt_valor.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString(),txt_quantidade.getText()));
+    }//GEN-LAST:event_btn_adicionarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -561,7 +606,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_item;
     private javax.swing.JTextField txt_nome;
     private javax.swing.JTextField txt_nome_cliente;
-    private javax.swing.JTextField txt_quantidade;
+    public static javax.swing.JTextField txt_quantidade;
     private javax.swing.JTextField txt_rua;
     private javax.swing.JTextField txt_telefone;
     private javax.swing.JTextField txt_valor;
