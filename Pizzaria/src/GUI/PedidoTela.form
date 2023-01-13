@@ -532,7 +532,7 @@
                         <Column editable="false" title="C&#xf3;digo Item" type="java.lang.Object"/>
                         <Column editable="false" title="Descri&#xe7;&#xe3;o" type="java.lang.Object"/>
                         <Column editable="false" title="Valor Unit&#xe1;rio" type="java.lang.Object"/>
-                        <Column editable="false" title="" type="java.lang.Object"/>
+                        <Column editable="false" title="Quantidade" type="java.lang.Object"/>
                         <Column editable="false" title="Total" type="java.lang.Object"/>
                       </Table>
                     </Property>

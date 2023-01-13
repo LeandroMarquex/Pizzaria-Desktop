@@ -326,7 +326,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Código Item", "Descrição", "Valor Unitário", "", "Total"
+                "Código Item", "Descrição", "Valor Unitário", "Quantidade", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -566,6 +566,8 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
         // TODO add your handling code here:
         if(pedidoC.verificarItens(txt_valor.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString(),txt_quantidade.getText()));
+        double total = Double.parseDouble(txt_valor.getText()) * Integer.parseInt(txt_quantidade.getText());
+        modelo.addRow(new Object[]{txt_codigo_pedido.getText(), cb_selecionar_item.getSelectedItem(), txt_valor.getText(), txt_quantidade.getText(), total});
     }//GEN-LAST:event_btn_adicionarActionPerformed
 
 
