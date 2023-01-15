@@ -9,6 +9,7 @@ import Beans.ClienteBeans;
 import Beans.PedidoBeans;
 import Controller.ClienteController;
 import Controller.PedidoController;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +40,9 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     MaskFormatter FormatoTel;
     SimpleDateFormat FormatoData;
     Date DataAtual;
+    
+    DecimalFormat formatoDecimal;
+    
 
     public PedidoTela() {
         initComponents();
@@ -51,7 +55,8 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         pedidoB = new PedidoBeans();
         pedidoC = new PedidoController();
         PainePedido.setEnabledAt(0, false);
-        modelo = (DefaultTableModel)tabela_pedido.getModel();
+        modelo = (DefaultTableModel) tabela_pedido.getModel();
+        formatoDecimal = new DecimalFormat("0.00");
     }
 
     /**
@@ -342,6 +347,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         btn_finalizar.setText("Finalizar");
 
         btn_fechar.setText("Fechar");
+        btn_fechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_fecharActionPerformed(evt);
+            }
+        });
 
         btn_valor_item.setText("Valor");
         btn_valor_item.addActionListener(new java.awt.event.ActionListener() {
@@ -534,8 +544,8 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void btn_valor_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_valor_itemActionPerformed
         // TODO add your handling code here:
-       txt_valor.setText(pedidoC.controleDeValor(cb_selecionar_item.getSelectedItem().toString()) + "");
-       txt_codigo_pedido.setText(pedidoC.controleDeCodigo(cb_selecionar_item.getSelectedItem().toString()) + "");
+        txt_valor.setText(pedidoC.controleDeValor(cb_selecionar_item.getSelectedItem().toString()) + "");
+        txt_codigo_pedido.setText(pedidoC.controleDeCodigo(cb_selecionar_item.getSelectedItem().toString()) + "");
     }//GEN-LAST:event_btn_valor_itemActionPerformed
 
     private void cb_selecionar_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_selecionar_itemActionPerformed
@@ -548,15 +558,15 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             int x = Integer.parseInt(txt_quantidade.getText());
-            if (x==0) {
-               JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0 ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));  
-               txt_quantidade.setText("1");
-               txt_quantidade.requestFocus();
+            if (x == 0) {
+                JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0 ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                txt_quantidade.setText("1");
+                txt_quantidade.requestFocus();
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Insira um  número inteiro ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
         }
-        
+
     }//GEN-LAST:event_txt_quantidadeFocusLost
 
     private void txt_quantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_quantidadeActionPerformed
@@ -565,10 +575,17 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
         // TODO add your handling code here:
-        if(pedidoC.verificarItens(txt_valor.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString(),txt_quantidade.getText()));
-        double total = Double.parseDouble(txt_valor.getText()) * Integer.parseInt(txt_quantidade.getText());
-        modelo.addRow(new Object[]{txt_codigo_pedido.getText(), cb_selecionar_item.getSelectedItem(), txt_valor.getText(), txt_quantidade.getText(), total});
+        if (pedidoC.verificarItens(txt_valor.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString(), txt_quantidade.getText())) {
+            double total = Double.parseDouble(txt_valor.getText()) * Integer.parseInt(txt_quantidade.getText());
+            modelo.addRow(new Object[]{txt_codigo_pedido.getText(), cb_selecionar_item.getSelectedItem(), txt_valor.getText(), txt_quantidade.getText(), formatoDecimal.format(total).replace(',', '.')});
+            limparItens();
+        }
     }//GEN-LAST:event_btn_adicionarActionPerformed
+
+    private void btn_fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_fecharActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btn_fecharActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -624,4 +641,12 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         txt_telefone.setEnabled(valor);
         txt_data.setEnabled(valor);
     }
+
+    final void limparItens() {
+        txt_item.setText("");
+        txt_quantidade.setText("");
+        txt_valor.setText("");
+        cb_selecionar_item.removeAllItems();
+    }
+
 }
