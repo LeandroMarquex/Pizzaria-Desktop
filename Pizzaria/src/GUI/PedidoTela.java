@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
@@ -57,6 +58,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         PainePedido.setEnabledAt(0, false);
         modelo = (DefaultTableModel) tabela_pedido.getModel();
         formatoDecimal = new DecimalFormat("0.00");
+        tabela_pedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -321,6 +323,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         });
 
         btn_remover.setText("-");
+        btn_remover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_removerActionPerformed(evt);
+            }
+        });
 
         btn_calcular.setText("Calcular");
 
@@ -586,6 +593,12 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btn_fecharActionPerformed
+
+    private void btn_removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removerActionPerformed
+        // TODO add your handling code here:
+        modelo.removeRow((tabela_pedido.getSelectedRow()));
+        double totalPedido = 0;
+    }//GEN-LAST:event_btn_removerActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
