@@ -330,6 +330,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         });
 
         btn_calcular.setText("Calcular");
+        btn_calcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_calcularActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Total");
 
@@ -599,6 +604,15 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         modelo.removeRow((tabela_pedido.getSelectedRow()));
         double totalPedido = 0;
     }//GEN-LAST:event_btn_removerActionPerformed
+
+    private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
+        // TODO add your handling code here:
+        double totalPedido = 0;
+        for (int i = 0; i < tabela_pedido.getRowCount(); i++) {
+            totalPedido += Double.parseDouble(modelo.getValueAt(1, 4).toString());
+        }
+        txt_valor_total.setText(formatoDecimal.format(totalPedido).replace('.','.'));
+    }//GEN-LAST:event_btn_calcularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
