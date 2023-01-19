@@ -112,6 +112,7 @@ public class Principal extends javax.swing.JFrame {
         menuCaixa.setText("CAIXA");
 
         menuPedido.setText("PEDIDO");
+        menuPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         menuPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuPedidoActionPerformed(evt);

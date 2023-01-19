@@ -587,10 +587,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
         // TODO add your handling code here:
-        if (pedidoC.verificarItens(txt_valor.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString(), txt_quantidade.getText())) {
-            double total = Double.parseDouble(txt_valor.getText()) * Integer.parseInt(txt_quantidade.getText());
-            modelo.addRow(new Object[]{txt_codigo_pedido.getText(), cb_selecionar_item.getSelectedItem(), txt_valor.getText(), txt_quantidade.getText(), formatoDecimal.format(total).replace(',', '.')});
+        if(pedidoC.verificarItens(txt_valor.getText(), txt_quantidade.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString())){
+            double Total = Double.parseDouble(txt_valor.getText()) * Integer.parseInt(txt_quantidade.getText());
+            modelo.addRow(new Object[]{txt_codigo.getText(), cb_selecionar_item.getSelectedItem(), txt_valor.getText(), txt_quantidade.getText(), Total});
             limparItens();
+            CalcularTotal();
         }
     }//GEN-LAST:event_btn_adicionarActionPerformed
 
@@ -602,16 +603,12 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     private void btn_removerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removerActionPerformed
         // TODO add your handling code here:
         modelo.removeRow((tabela_pedido.getSelectedRow()));
-        double totalPedido = 0;
+        CalcularTotal();
     }//GEN-LAST:event_btn_removerActionPerformed
 
     private void btn_calcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_calcularActionPerformed
         // TODO add your handling code here:
-        double totalPedido = 0;
-        for (int i = 0; i < tabela_pedido.getRowCount(); i++) {
-            totalPedido += Double.parseDouble(modelo.getValueAt(1, 4).toString());
-        }
-        txt_valor_total.setText(formatoDecimal.format(totalPedido).replace('.','.'));
+        CalcularTotal();
     }//GEN-LAST:event_btn_calcularActionPerformed
 
 
@@ -675,5 +672,16 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         txt_valor.setText("");
         cb_selecionar_item.removeAllItems();
     }
+    final void CalcularTotal(){
+     double TotalPedido = 0;
+         for(int i = 0; i < tabela_pedido.getRowCount(); i++){
+             TotalPedido += Double.parseDouble(modelo.getValueAt(i, 4).toString());
+            
+         }
+         if(TotalPedido > 0){
+             btn_finalizar.setEnabled(true);
+         }
+          txt_valor_total.setText(formatoDecimal.format(TotalPedido).replace('.', ','));
+}
 
 }

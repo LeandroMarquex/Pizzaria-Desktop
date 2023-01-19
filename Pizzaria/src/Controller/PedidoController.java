@@ -35,7 +35,7 @@ public class PedidoController {
         return pedidoD.valorDoCodigo(pesquisa);
     }
 
-    public boolean verificarItens(String valor, String codigo, String item, String quantidade) {
+    public boolean verificarItens2(String valor, String codigo, String item, String quantidade) {
         if (valor.equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo VALOR ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return false;
@@ -66,5 +66,43 @@ public class PedidoController {
   //      }
         return true;
     }
+    public boolean verificarItens(String Valor, String Quantidade, String Codigo, String Item){
+         
+          try{
+            int x = Integer.parseInt(Quantidade);
+            if(x == 0){
+                 JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                 PedidoTela.txt_quantidade.setText("1");
+                 PedidoTela.txt_quantidade.grabFocus();
+            }
+        }catch(NumberFormatException Ex){
+             JOptionPane.showMessageDialog(null, "Insira um número inteiro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+             PedidoTela.txt_quantidade.setText("1");
+             PedidoTela.txt_quantidade.grabFocus();
+        }
+         
+        if(Quantidade.equals("")){
+            // JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            return false;
+        }
+         
+         
+         if(Valor.equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            return false;
+        }
+         
+         if(Codigo.equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo Código", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            return false;
+        }
+         
+         if(Item.equals("")){
+            JOptionPane.showMessageDialog(null, "Preencha o campo Item", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            return false;
+        }
+         
+         return true;
+     }
 
 }
