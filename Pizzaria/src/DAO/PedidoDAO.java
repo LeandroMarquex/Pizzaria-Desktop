@@ -71,5 +71,8 @@ public class PedidoDAO {
         return  0;
         
     }
+     public void cadastrarPedido(String codigoCliente, String codigoFuncionario, String total){
+         String SQLInsert = "insert into pedido(ped_cod, ped_data, ped_hora, ped_total, ped_cli_cod,ped_fun_cod, ped_ent_cod, ped_status_) values(?,?,?,?,?,?,?)";
+     }
 
 }

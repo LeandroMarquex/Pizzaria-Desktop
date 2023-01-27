@@ -27,7 +27,7 @@ public class PedidoBeans {
 
     public PedidoBeans() {
         codCardapio = new ArrayList<>();
-        codCardapio = new ArrayList<>();
+        quantidade = new ArrayList<>();
 
     }
 

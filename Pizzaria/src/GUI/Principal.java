@@ -153,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void menuPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPedidoActionPerformed
         // TODO add your handling code here:
-        pedidoTela = new PedidoTela();
+        pedidoTela = new PedidoTela(1);
         tela.add(pedidoTela);
         pedidoTela.setVisible(true);
     }//GEN-LAST:event_menuPedidoActionPerformed

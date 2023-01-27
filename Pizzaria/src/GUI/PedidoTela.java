@@ -45,7 +45,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     DecimalFormat formatoDecimal;
     
 
-    public PedidoTela() {
+    public PedidoTela(int codFuncionario) {
         initComponents();
         habilitarCampos(false);
         lista = new ArrayList<>();
