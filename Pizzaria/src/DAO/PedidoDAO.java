@@ -9,6 +9,8 @@ import Utilitarios.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,10 +53,11 @@ public class PedidoDAO {
             JOptionPane.showMessageDialog(null, "Erro ao PESQUISAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
 
         }
-        return  0;
-        
+        return 0;
+
     }
-     public int valorDoCodigo(String pesquisa) {
+
+    public int valorDoCodigo(String pesquisa) {
         try {
             String SQLPesquisa = "select * from cardapio where car_descricao = ? ";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLPesquisa);
@@ -68,11 +71,31 @@ public class PedidoDAO {
             JOptionPane.showMessageDialog(null, "Erro ao PESQUISAR registro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
 
         }
-        return  0;
-        
+        return 0;
+
     }
-     public void cadastrarPedido(String codigoCliente, String codigoFuncionario, String total){
-         String SQLInsert = "insert into pedido(ped_cod, ped_data, ped_hora, ped_total, ped_cli_cod,ped_fun_cod, ped_ent_cod, ped_status_) values(?,?,?,?,?,?,?)";
-     }
+
+    public void cadastrarPedido(String ped_cod, String ped_data, String ped_hora,  String ped_total, String ped_cli_cod,  String ped_fun_cod, String ped_ent_cod, String ped_status ) {
+        Date data = new Date();
+        SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatoHora = new SimpleDateFormat("hh-MM-ss");
+        try {
+            String SQLInsert = "insert into pedido(ped_cod, ped_data, ped_hora, ped_total, ped_cli_cod,ped_fun_cod, ped_ent_cod, ped_status) values(?,?,?,?,?,?,?)";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInsert);
+            st.setString(1, ped_cod);
+            st.setString(2, formatoData.format(ped_data));
+            st.setString(3, formatoHora.format(ped_hora));
+            st.setString(4, ped_total);
+            st.setString(5, ped_cli_cod);
+            st.setString(6, ped_fun_cod);
+            st.setString(7, ped_ent_cod);
+            st.setString(8, "Pedido Aberto");
+            
+            st.execute();
+            Conexao.getConnection().commit();
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }
