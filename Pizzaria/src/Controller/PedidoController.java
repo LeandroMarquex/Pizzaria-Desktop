@@ -48,61 +48,64 @@ public class PedidoController {
             JOptionPane.showMessageDialog(null, "Preencha o campo ITEM ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return false;
         }
-    //    if (quantidade.equals("")) {
-            try {
-                int x = Integer.parseInt(quantidade);
-                if (x == 0) {
-                    JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0 ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
-                    PedidoTela.txt_quantidade.setText("1");
-                    PedidoTela.txt_quantidade.grabFocus();
+        //    if (quantidade.equals("")) {
+        try {
+            int x = Integer.parseInt(quantidade);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0 ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+                PedidoTela.txt_quantidade.setText("1");
+                PedidoTela.txt_quantidade.grabFocus();
 
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Insira um  número inteiro ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Insira um  número inteiro ", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            PedidoTela.txt_quantidade.setText("1");
+            PedidoTela.txt_quantidade.grabFocus();
+        }
+
+        //      }
+        return true;
+    }
+
+    public boolean verificarItens(String Valor, String Quantidade, String Codigo, String Item) {
+
+        try {
+            int x = Integer.parseInt(Quantidade);
+            if (x == 0) {
+                JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
                 PedidoTela.txt_quantidade.setText("1");
                 PedidoTela.txt_quantidade.grabFocus();
             }
-            
-  //      }
-        return true;
-    }
-    public boolean verificarItens(String Valor, String Quantidade, String Codigo, String Item){
-         
-          try{
-            int x = Integer.parseInt(Quantidade);
-            if(x == 0){
-                 JOptionPane.showMessageDialog(null, "A quantidade não pode ser 0", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
-                 PedidoTela.txt_quantidade.setText("1");
-                 PedidoTela.txt_quantidade.grabFocus();
-            }
-        }catch(NumberFormatException Ex){
-             JOptionPane.showMessageDialog(null, "Insira um número inteiro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
-             PedidoTela.txt_quantidade.setText("1");
-             PedidoTela.txt_quantidade.grabFocus();
+        } catch (NumberFormatException Ex) {
+            JOptionPane.showMessageDialog(null, "Insira um número inteiro", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            PedidoTela.txt_quantidade.setText("1");
+            PedidoTela.txt_quantidade.grabFocus();
         }
-         
-        if(Quantidade.equals("")){
+
+        if (Quantidade.equals("")) {
             // JOptionPane.showMessageDialog(null, "Preencha o campo Quantidade", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return false;
         }
-         
-         
-         if(Valor.equals("")){
+
+        if (Valor.equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Valor", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return false;
         }
-         
-         if(Codigo.equals("")){
+
+        if (Codigo.equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Código", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return false;
         }
-         
-         if(Item.equals("")){
+
+        if (Item.equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha o campo Item", "Erro", 0, new ImageIcon("Imagens/btn_sair.png"));
             return false;
         }
-         
-         return true;
-     }
 
+        return true;
+    }
+
+    public void controleDePedido(String ped_cod, String ped_total, String ped_cli_cod, String ped_fun_cod ) {
+        pedidoD.cadastrarPedido(ped_cod, ped_total, ped_cli_cod, ped_fun_cod);
+    }
 }

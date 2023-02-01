@@ -43,6 +43,8 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     Date DataAtual;
     
     DecimalFormat formatoDecimal;
+    int codigoFuncionario;
+    
     
 
     public PedidoTela(int codFuncionario) {
@@ -59,6 +61,8 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         modelo = (DefaultTableModel) tabela_pedido.getModel();
         formatoDecimal = new DecimalFormat("0.00");
         tabela_pedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        this.codigoFuncionario = codigoFuncionario;
     }
 
     /**
@@ -296,6 +300,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         jLabel9.setText("Valor");
 
         txt_valor.setEditable(false);
+        txt_valor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_valorActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Quantidade");
 
@@ -314,6 +323,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         jLabel11.setText("Código");
 
         txt_codigo_pedido.setEditable(false);
+        txt_codigo_pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_codigo_pedidoActionPerformed(evt);
+            }
+        });
 
         btn_adicionar.setText("+");
         btn_adicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -357,6 +371,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tabela_pedido);
 
         btn_finalizar.setText("Finalizar");
+        btn_finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_finalizarActionPerformed(evt);
+            }
+        });
 
         btn_fechar.setText("Fechar");
         btn_fechar.addActionListener(new java.awt.event.ActionListener() {
@@ -610,6 +629,20 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         CalcularTotal();
     }//GEN-LAST:event_btn_calcularActionPerformed
+
+    private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
+        // TODO add your handling code here:
+        pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText(), codigoFuncionario + "");
+                
+    }//GEN-LAST:event_btn_finalizarActionPerformed
+
+    private void txt_codigo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_codigo_pedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_codigo_pedidoActionPerformed
+
+    private void txt_valorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_valorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_valorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
