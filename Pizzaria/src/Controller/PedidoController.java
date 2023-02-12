@@ -105,7 +105,7 @@ public class PedidoController {
         return true;
     }
 
-    public void controleDePedido(String ped_cod, String ped_total, String ped_cli_cod, String ped_fun_cod ) {
-        pedidoD.cadastrarPedido(ped_cod, ped_total, ped_cli_cod, ped_fun_cod);
+    public void controleDePedido(String ped_cod, String ped_total, String ped_cli_cod ) {
+        pedidoD.cadastrarPedido(ped_cod, ped_total, ped_cli_cod);
     }
 }

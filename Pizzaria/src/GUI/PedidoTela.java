@@ -632,7 +632,8 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
         // TODO add your handling code here:
-        pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText(), codigoFuncionario + "");
+    //    pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText(), codigoFuncionario + "");
+        pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText());
                 
     }//GEN-LAST:event_btn_finalizarActionPerformed
 
