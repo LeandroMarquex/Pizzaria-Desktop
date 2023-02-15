@@ -546,6 +546,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         PainePedido.setEnabledAt(1, false);
         PainePedido.setEnabledAt(0, true);
         PainePedido.setSelectedIndex(1);
+        txt_nome_cliente.setText(txt_nome.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txt_itemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_itemActionPerformed

@@ -95,12 +95,32 @@ public class PedidoDAO {
             st.setString(8, "Pedido Aberto");
 
             st.execute();
+            codigoPedido();
             Conexao.getConnection().commit();
+            
             JOptionPane.showMessageDialog(null, "Registro Salvo com Sucesso", "SALVO", 1, new ImageIcon("Imagens/ok.png"));
         } catch (SQLException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
                JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Registro", "ERRO", 0, new ImageIcon("Imagens/btn_sair.png"));
         }
     }
+     public String codigoPedido(){
+         String cod = "0";
+         
+          try {
+            String SQLSelection = "select ped_cod from pedidos order by ped_cod desc limit 1 ";
+            PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
+             ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                cod = rs.getString("ped_cod");
+                JOptionPane.showMessageDialog(null, cod, "ERRO", 0, new ImageIcon("Imagens/btn_sair.png"));
+            }
+           
+        } catch (SQLException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex, "Erro ao PESQUISAR registro", 0, new ImageIcon("Imagens/btn_sair.png"));
 
+        }
+        return cod;
+     }
 }
