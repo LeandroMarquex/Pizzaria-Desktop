@@ -129,7 +129,7 @@ public class PedidoDAO {
 
     public void cadastrarItens(String codigoCliente, String codigoFuncionario, String codigoPedido, int tamanhoTabela, PedidoBeans PedidoB) {
         for (int i = 0; i < tamanhoTabela; i++) {
-            String SQLInserir = "inserir into item(item_ent_cod, item_fun_cod, item_cli_cod, item_ped_cod, item_car_cod,item_quantidade) values (?, ?, ?, ?, ?, ?)";
+            String SQLInserir = "insert into item(item_ent_cod, item_fun_cod, item_cli_cod, item_ped_cod, item_car_cod,item_quantidade) values (?, ?, ?, ?, ?, ?)";
             try {
                 PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInserir);
                 st.setString(1, "");

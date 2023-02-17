@@ -354,7 +354,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
         tabela_pedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Código Item", "Descrição", "Valor Unitário", "Quantidade", "Total"
@@ -729,7 +729,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         pedidoB.setData(FormatoHora.format(DataAtual));
         pedidoB.setData(FormatoData.format(DataAtual));
         pedidoB.setStatus("Pedido Aberto");
-        pedidoB.setValor(Double.parseDouble(txt_valor_total.getText()));
+        pedidoB.setValor(Double.parseDouble(txt_valor_total.getText().replace(',', '.')));
         
         for (int i = 0; i < tabela_pedido.getRowCount(); i++) {
             pedidoB.setCodCardapio(Integer.parseInt(modelo.getValueAt(i, 0).toString()));
