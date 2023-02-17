@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Beans.PedidoBeans;
 import Utilitarios.Conexao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -78,7 +79,7 @@ public class PedidoDAO {
     }
 
 //    public void cadastrarPedido(String ped_cod, String ped_data, String ped_hora, String ped_total, String ped_cli_cod, String ped_fun_cod, String ped_ent_cod, String ped_status) {
-           public void cadastrarPedido(String ped_cod, String ped_total, String ped_cli_cod ) {
+    public void cadastrarPedido(String ped_cod, String ped_total, String codigoCliente, String codigoFuncionario, String ped_cli_cod, int tamanhoTabela,PedidoBeans PedidoB) {
         Date data = new Date();
         SimpleDateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
@@ -95,32 +96,56 @@ public class PedidoDAO {
             st.setString(8, "Pedido Aberto");
 
             st.execute();
+            cadastrarItens(codigoCliente, codigoFuncionario, codigoPedido(), tamanhoTabela, PedidoB);
             codigoPedido();
             Conexao.getConnection().commit();
-            
+
             JOptionPane.showMessageDialog(null, "Registro Salvo com Sucesso", "SALVO", 1, new ImageIcon("Imagens/ok.png"));
         } catch (SQLException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
-               JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Registro", "ERRO", 0, new ImageIcon("Imagens/btn_sair.png"));
+            JOptionPane.showMessageDialog(null, "Erro ao Cadastrar Registro", "ERRO", 0, new ImageIcon("Imagens/btn_sair.png"));
         }
     }
-     public String codigoPedido(){
-         String cod = "0";
-         
-          try {
+
+    public String codigoPedido() {
+        String cod = "0";
+
+        try {
             String SQLSelection = "select ped_cod from pedidos order by ped_cod desc limit 1 ";
             PreparedStatement st = Conexao.getConnection().prepareStatement(SQLSelection);
-             ResultSet rs = st.executeQuery();
+            ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 cod = rs.getString("ped_cod");
                 JOptionPane.showMessageDialog(null, cod, "ERRO", 0, new ImageIcon("Imagens/btn_sair.png"));
             }
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, ex, "Erro ao PESQUISAR registro", 0, new ImageIcon("Imagens/btn_sair.png"));
 
         }
         return cod;
-     }
+    }
+
+    public void cadastrarItens(String codigoCliente, String codigoFuncionario, String codigoPedido, int tamanhoTabela, PedidoBeans PedidoB) {
+        for (int i = 0; i < tamanhoTabela; i++) {
+            String SQLInserir = "inserir into item(item_ent_cod, item_fun_cod, item_cli_cod, item_ped_cod, item_car_cod,item_quantidade) values (?, ?, ?, ?, ?, ?)";
+            try {
+                PreparedStatement st = Conexao.getConnection().prepareStatement(SQLInserir);
+                st.setString(1, "");
+                st.setString(2, codigoFuncionario);
+                st.setString(3, codigoCliente);
+                st.setString(4, codigoPedido);
+                st.setInt(5, PedidoB.getCodCardapio(i));
+                st.setInt(6, PedidoB.getQuantidade(i));
+                
+                st.execute();
+            } catch (SQLException ex) {
+               
+                Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, ex, "Erro ao PESQUISAR registro", 0, new ImageIcon("Imagens/btn_sair.png"));
+            }
+        }
+
+    }
 }

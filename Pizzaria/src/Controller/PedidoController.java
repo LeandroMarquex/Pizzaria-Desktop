@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Beans.PedidoBeans;
 import DAO.PedidoDAO;
 import GUI.PedidoTela;
 import java.util.List;
@@ -105,7 +106,9 @@ public class PedidoController {
         return true;
     }
 
-    public void controleDePedido(String ped_cod, String ped_total, String ped_cli_cod ) {
-        pedidoD.cadastrarPedido(ped_cod, ped_total, ped_cli_cod);
+    public void controleDePedido(String ped_cod, String ped_total, String codigoCliente, String codigoFuncionario, String ped_cli_cod, int tamanhoTabela,PedidoBeans PedidoB) {
+        pedidoD.cadastrarPedido(ped_cod, ped_total, codigoCliente, codigoFuncionario, ped_cli_cod, tamanhoTabela, PedidoB);
     }
+
+   
 }

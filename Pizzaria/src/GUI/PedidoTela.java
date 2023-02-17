@@ -39,13 +39,11 @@ public class PedidoTela extends javax.swing.JInternalFrame {
     DefaultTableModel modelo;
 
     MaskFormatter FormatoTel;
-    SimpleDateFormat FormatoData;
+    SimpleDateFormat FormatoData, FormatoHora;
     Date DataAtual;
-    
+
     DecimalFormat formatoDecimal;
     int codigoFuncionario;
-    
-    
 
     public PedidoTela(int codFuncionario) {
         initComponents();
@@ -61,8 +59,10 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         modelo = (DefaultTableModel) tabela_pedido.getModel();
         formatoDecimal = new DecimalFormat("0.00");
         tabela_pedido.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
         this.codigoFuncionario = codigoFuncionario;
+        FormatoData = new SimpleDateFormat("yyyy-MM-dd");
+        FormatoHora = new SimpleDateFormat("HH:mm:ss");
     }
 
     /**
@@ -607,7 +607,7 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void btn_adicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_adicionarActionPerformed
         // TODO add your handling code here:
-        if(pedidoC.verificarItens(txt_valor.getText(), txt_quantidade.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString())){
+        if (pedidoC.verificarItens(txt_valor.getText(), txt_quantidade.getText(), txt_codigo.getText(), cb_selecionar_item.getSelectedItem().toString())) {
             double Total = Double.parseDouble(txt_valor.getText()) * Integer.parseInt(txt_quantidade.getText());
             modelo.addRow(new Object[]{txt_codigo.getText(), cb_selecionar_item.getSelectedItem(), txt_valor.getText(), txt_quantidade.getText(), Total});
             limparItens();
@@ -633,9 +633,10 @@ public class PedidoTela extends javax.swing.JInternalFrame {
 
     private void btn_finalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_finalizarActionPerformed
         // TODO add your handling code here:
-    //    pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText(), codigoFuncionario + "");
-        pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText());
-                
+        //    pedidoC.controleDePedido(txt_codigo.getText(), txt_valor_total.getText(), txt_codigo_pedido.getText(), codigoFuncionario + "");
+        
+        popularBeans();
+        pedidoC.controleDePedido(txt_codigo_pedido.getText(), txt_valor_total.getText(), txt_codigo.getText(), codigoFuncionario + "", txt_codigo_pedido.getText(), tabela_pedido.getRowCount(), pedidoB);
     }//GEN-LAST:event_btn_finalizarActionPerformed
 
     private void txt_codigo_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_codigo_pedidoActionPerformed
@@ -707,16 +708,35 @@ public class PedidoTela extends javax.swing.JInternalFrame {
         txt_valor.setText("");
         cb_selecionar_item.removeAllItems();
     }
-    final void CalcularTotal(){
-     double TotalPedido = 0;
-         for(int i = 0; i < tabela_pedido.getRowCount(); i++){
-             TotalPedido += Double.parseDouble(modelo.getValueAt(i, 4).toString());
-            
-         }
-         if(TotalPedido > 0){
-             btn_finalizar.setEnabled(true);
-         }
-          txt_valor_total.setText(formatoDecimal.format(TotalPedido).replace('.', ','));
-}
 
+    final void CalcularTotal() {
+        double TotalPedido = 0;
+        for (int i = 0; i < tabela_pedido.getRowCount(); i++) {
+            TotalPedido += Double.parseDouble(modelo.getValueAt(i, 4).toString());
+
+        }
+        if (TotalPedido > 0) {
+            btn_finalizar.setEnabled(true);
+        }
+        txt_valor_total.setText(formatoDecimal.format(TotalPedido).replace('.', ','));
+    }
+    final void popularBeans(){
+        DataAtual = new Date(0);
+    
+        pedidoB.setCodigoCliente(Integer.parseInt(txt_codigo.getText()));
+        pedidoB.setCodigoFuncionario(codigoFuncionario);
+        pedidoB.setCodigoEntregador(1);
+        pedidoB.setData(FormatoHora.format(DataAtual));
+        pedidoB.setData(FormatoData.format(DataAtual));
+        pedidoB.setStatus("Pedido Aberto");
+        pedidoB.setValor(Double.parseDouble(txt_valor_total.getText()));
+        
+        for (int i = 0; i < tabela_pedido.getRowCount(); i++) {
+            pedidoB.setCodCardapio(Integer.parseInt(modelo.getValueAt(i, 0).toString()));
+            pedidoB.setQuantidade(Integer.parseInt(modelo.getValueAt(i, 3).toString()));
+        }
+            
+        
+    }
+   
 }
